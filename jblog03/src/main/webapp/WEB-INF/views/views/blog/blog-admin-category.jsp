@@ -8,6 +8,51 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+
+<script>
+$(function(){
+	$("#btn-addCategory").click(() => {
+		var name = $("#name").val();
+		var desc = $("#desc").val();
+		
+		console.log('==', name, desc, '==');
+		
+		if(name == '' || desc == '') {
+			return;
+		}
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath }/category/api/add",
+			type: "post",
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify({name:$('#name').val(), desc:$('#desc').val()}),
+			error: function(xhr, status, e) {
+				console.log(status, e);
+			},
+			success: function(response) {
+				console.log(response);
+				
+				/*
+				if(response.result != "success") {
+					console.error(response.message);
+					return;
+				}
+				
+				if(response.data) {
+					alert("존재하는 이메일입니다. 다른 이메일을 사용하세요.");
+					$("#blog-id")
+						.val("")
+						.focus();
+					return;
+				}*/
+				
+			}
+		});		 
+	});	
+});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -19,6 +64,8 @@
 			
 				<c:import url="/WEB-INF/views/views/includes/navigation3.jsp" />
 				
+				
+				
 		      	<table class="admin-cat">
 		      		<tr>
 		      			<th>번호</th>
@@ -27,42 +74,33 @@
 		      			<th>설명</th>
 		      			<th>삭제</th>      			
 		      		</tr>
-					<tr>
-						<td>3</td>
-						<td>미분류</td>
-						<td>10</td>
-						<td>카테고리를 지정하지 않은 경우</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>  
-					<tr>
-						<td>2</td>
-						<td>스프링 스터디</td>
-						<td>20</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>스프링 프로젝트</td>
-						<td>15</td>
-						<td>어쩌구 저쩌구</td>
-						<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-					</tr>					  
+		      		
+		      		<c:forEach items='${list }' var='vo' varStatus='status'>
+						<tr>
+							<td>${status.index+1 }</td>
+							<td>${vo.name }</td>
+							<td>게시물수조인해서가져오기</td>
+							<td>${vo.desc }</td>
+							<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+						</tr>  
+					</c:forEach>
+					
+									  
 				</table>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
 		      	<table id="admin-cat-add">
 		      		<tr>
 		      			<td class="t">카테고리명</td>
-		      			<td><input type="text" name="name"></td>
+		      			<td><input type="text" id="name" name="name"></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="t">설명</td>
-		      			<td><input type="text" name="desc"></td>
+		      			<td><input type="text" id="desc" name="desc"></td>
 		      		</tr>
 		      		<tr>
 		      			<td class="s">&nbsp;</td>
-		      			<td><input type="submit" value="카테고리 추가"></td>
+		      			<td><input id="btn-addCategory" type="submit" value="카테고리 추가"></td>
 		      		</tr>      		      		
 		      	</table> 
 			</div>

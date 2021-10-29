@@ -3,6 +3,7 @@ package com.douzone.jblog.controller.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,16 @@ public class CategoryController {
 		vo.setBlog_id("asd");
 		
 		categoryService.addCategory(vo);
+		
+		return new ResponseEntity<String>("성공", HttpStatus.OK);
+		
+		//return JsonResult.success(categoryService.addCategory(vo) != true);
+	}
+	
+	@DeleteMapping("/delete")
+	public ResponseEntity<?> checkemail(int no) {
+		
+		categoryService.deleteCategory(no);
 		
 		return new ResponseEntity<String>("성공", HttpStatus.OK);
 		

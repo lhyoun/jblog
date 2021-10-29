@@ -24,5 +24,10 @@ public class CategoryService {
 	public boolean addCategory( CategoryVo categoryVo ) {
 		return categoryRepository.insert( categoryVo ) == 1;
 	}
+
+	public boolean deleteCategory(int no) {
+		return categoryRepository.delete(no) == 1;
+		
+	}
 	
 }

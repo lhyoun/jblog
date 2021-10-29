@@ -12,6 +12,7 @@
 
 <script>
 $(function(){
+	
 	$("#btn-addCategory").click(() => {
 		var name = $("#name").val();
 		var desc = $("#desc").val();
@@ -34,25 +35,26 @@ $(function(){
 			success: function(response) {
 				console.log(response);
 				
-				/*
-				if(response.result != "success") {
-					console.error(response.message);
+				
+				if(response == "성공") {
+					alert(response);
 					return;
 				}
 				
-				if(response.data) {
-					alert("존재하는 이메일입니다. 다른 이메일을 사용하세요.");
-					$("#blog-id")
-						.val("")
-						.focus();
-					return;
-				}*/
-				
 			}
 		});		 
-	});	
+	});
+	
 });
 </script>
+<script type="text/javascript"> 
+
+	var delete_category = (no)=>{
+		alert(no);
+	};
+      
+
+</script> 
 </head>
 <body>
 	<div id="container">
@@ -81,7 +83,7 @@ $(function(){
 							<td>${vo.name }</td>
 							<td>게시물수조인해서가져오기</td>
 							<td>${vo.desc }</td>
-							<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+							<td><img onclick="delete_category(${vo.no});" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
 						</tr>  
 					</c:forEach>
 					

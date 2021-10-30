@@ -19,8 +19,6 @@ $(function(){
 			return;
 		}
 		
-		console.log(blogId);
-		
 		$.ajax({
 			url: "${pageContext.request.contextPath }/user/api/checkId?blogId=" + blogId,
 			type: "get",
@@ -31,19 +29,16 @@ $(function(){
 			success: function(response) {
 				console.log(response);
 				
-				/*
-				if(response.result != "success") {
+				/*if(response.result != "success") {
 					console.error(response.message);
 					return;
-				}
+				}*/
 				
 				if(response.data) {
-					alert("존재하는 이메일입니다. 다른 이메일을 사용하세요.");
-					$("#blog-id")
-						.val("")
-						.focus();
+					alert("존재하는 ID입니다. 다른 ID를 사용하세요.");
+					$("#blog-id").val("").focus();
 					return;
-				}*/
+				}
 				
 				$("#btn-checkId").hide();
 				$("#img-checkId").show();

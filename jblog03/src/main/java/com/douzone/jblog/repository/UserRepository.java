@@ -32,8 +32,9 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByNo", no);
 	}
 
-	public UserVo findByEmail(String email) {
-		return sqlSession.selectOne("user.findByEmail", email);
+	// id중복확인
+	public UserVo findById(String id) {
+		return sqlSession.selectOne("user.findById", id);
 	}
 
 	public boolean update(UserVo vo) {

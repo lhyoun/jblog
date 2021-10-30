@@ -11,12 +11,14 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	// 회원가입
 	public void join(UserVo vo) {
 		userRepository.insert(vo);
 	}
 
-	public UserVo getUser(String email) {
-		return userRepository.findByEmail(email);
+	// id중복확인 / select * from user where id = id
+	public UserVo getUser(String id) {
+		return userRepository.findById(id);
 	}
 	
 	public UserVo getUser(Long no) {

@@ -5,6 +5,7 @@
 	version="3.0">
 	<display-name>jblog03</display-name>
 
+	<!-- 아래 두개 applicationContext에 대한 설정인데 해당 File에 설명 있음 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext.xml</param-value>
@@ -14,6 +15,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
 
 	<!-- Encoding Filter -->
 	<filter>

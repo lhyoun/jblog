@@ -98,3 +98,11 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.douzone.jblog.controller, com.douzone.jblog.exception" />
 </beans>
+
+<!-- applicationContext에 대한 설명
+     diapatcherServlet에 대한 설정을 할 수 있다
+     @Controller를 Scan해서 HandlerMapping 객체에 주게 되는데 그에 필요한 Scan 범위
+     Controller의 Method의 return값을 처리할 ViewResolver
+     response의 body로 보내주는 data에 대한 설정을 위한 Message Source
+     dispatcherServlet - Controller - Service - Repository로
+     이어지는 과정에서 dispatcherServlet - Controller 사이에서 요청을 가로챌 수 있는 Intercepter 등을 설정할 수 있다 -->

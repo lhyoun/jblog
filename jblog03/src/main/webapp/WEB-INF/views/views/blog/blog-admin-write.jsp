@@ -19,21 +19,24 @@
 				
 				<c:import url="/WEB-INF/views/views/includes/navigation3.jsp" />
 				
-				<form action="" method="post">
+				<form action="${pageContext.request.contextPath}/${authUser.id }/admin/write" method="post">
 			      	<table class="admin-cat-write">
 			      		<tr>
 			      			<td class="t">제목</td>
 			      			<td>
 			      				<input type="text" size="60" name="title">
-				      			<select name="category">
-				      				<option>미분류</option>
-				      				<option>자바</option>
+				      			<select name="category_no">
+				      			
+				      				<c:forEach var="list" items="${list}"> 
+				      					<option value="${list.no}">${list.name}</option> 
+				      				</c:forEach>
+				      				
 				      			</select>
 				      		</td>
 			      		</tr>
 			      		<tr>
 			      			<td class="t">내용</td>
-			      			<td><textarea name="content"></textarea></td>
+			      			<td><textarea name="contents"></textarea></td>
 			      		</tr>
 			      		<tr>
 			      			<td>&nbsp;</td>

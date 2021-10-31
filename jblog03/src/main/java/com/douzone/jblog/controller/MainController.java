@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
    Jblog의 메인화면 Contoller
    
    - 10/30 메인화면으로 이동
+   - 10/31 @RequestMapping 수정 
 */
 
 @Controller
+@RequestMapping({"/main"})
 public class MainController {
 
-	@RequestMapping({"", "/main"})
+	@RequestMapping("")
 	public String index() {
 		return "main/index";
 	}	

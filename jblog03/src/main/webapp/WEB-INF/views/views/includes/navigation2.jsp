@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 		<div id="header">
-			<h1>Spring 이야기</h1>
+			<h1>${blogVo.title }</h1>
 			<ul>
 				<c:choose>
 					<c:when test="${empty authUser }">
@@ -12,7 +12,7 @@
 					</c:when>
 					<c:otherwise>
 						<li><a href="${pageContext.request.contextPath }/user/logout">로그아웃</a></li>
-						<li><a href="${pageContext.request.contextPath }/blog/admin">블로그 관리</a></li>
+						<li><a href="${pageContext.request.contextPath }/${authUser.id }/admin/basic">블로그 관리</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>

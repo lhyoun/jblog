@@ -16,6 +16,10 @@ public class PostRepository {
 		
 		return sqlSession.selectOne("post.findById", id);
 	}
-	
+
+	public int write(PostVo postVo) {
+		
+		return sqlSession.insert("post.insert", postVo);
+	}
 
 }

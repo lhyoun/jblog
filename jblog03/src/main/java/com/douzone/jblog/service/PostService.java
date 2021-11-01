@@ -18,5 +18,9 @@ public class PostService {
 		return postRepository.findById(id);
 	}
 
+	public int write(PostVo postVo) {
+		
+		return postRepository.write(postVo);
+	}
 
 }

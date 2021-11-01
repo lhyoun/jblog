@@ -98,8 +98,11 @@ public class BlogController {
 	public String write(@PathVariable("blogId") String blogId, PostVo postVo) {
 		
 		postVo.setUser_id(blogId);
-		//postService.
-		
+		System.out.println("===");
+		System.out.println(postVo);
+		int a = postService.write(postVo);
+		System.out.println(a);
+		System.out.println("===");
 		return "/blog/blog-admin-write";
 	}
 }

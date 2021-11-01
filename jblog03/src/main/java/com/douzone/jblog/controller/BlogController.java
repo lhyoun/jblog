@@ -47,12 +47,23 @@ public class BlogController {
 	}	
 	
 	// 블로그 메인화면으로 이동
-	@GetMapping("{blogId}")
-	public String main(@PathVariable("blogId") String blogId, Model model ) {
+	@GetMapping("{blogId}/{postId}")
+	public String main(@PathVariable("blogId") String blogId, @PathVariable("postId") Long postId, Model model ) {
+		System.out.println("=====");
+		System.out.println(postId);
+		System.out.println("=====");
 		
 		// blogId로 id, title, logo 받아옴
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
+		
+		// blogId로 포스트 찾아서 담아주기
+		List<PostVo> postVoList = postService.findAllById(blogId);
+		model.addAttribute("list", postVoList);
+		
+		// postId로 상단에 보여줄 게시물 담아주기
+		PostVo postVo = postService.findById(postId);
+		model.addAttribute("postVo", postVo);
 		
 		return "/blog/blog-main";
 	}

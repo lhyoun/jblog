@@ -18,19 +18,35 @@
 			<div id="content">
 				<!-- 상단 게시물 내용 -->
 				<div class="blog-content">
-					<h4>[${postVo.category_no }]${postVo.title }</h4>
+					<h4>[카테고리]${postVo.title }</h4>
 					<p>
 						${postVo.contents }
 					<p>
 				</div>
-				<hr style='border: 0; height: 1px;
-  							background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));'/>
 				<!-- 하단 게시물 목록 -->
+				<hr style='border: 0; height: 1px;
+	  							background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));'/>
+				<h4 style='padding: 10px; font-size: 1.3em; color: #9D96D0;'> 카테고리: 모든 카테고리 </h4>
 				<ul class="blog-list">
 					<c:forEach items='${list }' var='postVo' varStatus='status'>
 						<li><a href="${pageContext.request.contextPath}/${authUser.id}/${postVo.no}">${postVo.title }</a> <span>${postVo.reg_date }</span></li>
 					</c:forEach>
 				</ul>
+				
+				<!-- pager 추가 -->
+				<div class="pager">
+					<ul>
+						<li><a href="">◀</a></li>
+						<li class="selected"><a href="">1</a></li>
+						<li>2</li>
+						<li><a href="">3</a></li>
+						<li>4</li>
+						<li>5</li>
+						<li><a href="">▶</a></li>
+					</ul>
+				</div>
+									
+				<br/>
 			</div>
 		</div>
 

@@ -23,6 +23,7 @@
 		select no, title, contents, reg_date, category_no, user_id
 		  from post
 		 where user_id=#{id }
+		 order by reg_date desc
 		]]>
 	</select>
 

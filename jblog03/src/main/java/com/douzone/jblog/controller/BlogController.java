@@ -24,7 +24,7 @@ import com.douzone.jblog.vo.PostVo;
    - 10/30 블로그 메인화면으로 이동. * 현재는 동일한 메인인데 유저 받아와서 특정 유저의 블로그로 가야 함
            블로그 관리 화면, 카테고리, 글쓰기. * 이것도 유저 받아와야 함. @Auth 설정 필요
    - 10/31 블로그 메인화면 완료, 관리 화면, 카테고리, 글쓰기 유저 받아오기 및 path 설정 완료
-           
+   - 11/2  블로그 header, footer 1회만 application이나 session에 담아두도록 변경하기
                 
 */
 
@@ -49,21 +49,23 @@ public class BlogController {
 	// 블로그 메인화면으로 이동
 	@GetMapping("{blogId}/{postId}")
 	public String main(@PathVariable("blogId") String blogId, @PathVariable("postId") Long postId, Model model ) {
-		System.out.println("=====");
-		System.out.println(postId);
-		System.out.println("=====");
 		
 		// blogId로 id, title, logo 받아옴
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
+		// 나중에 바꿔야 함		
 		
 		// blogId로 포스트 찾아서 담아주기
 		List<PostVo> postVoList = postService.findAllById(blogId);
 		model.addAttribute("list", postVoList);
 		
 		// postId로 상단에 보여줄 게시물 담아주기
-		PostVo postVo = postService.findById(postId);
+		PostVo postVo = postService.findByNo(postId);
 		model.addAttribute("postVo", postVo);
+		
+		// blogId로 우측에 보여줄 카테고리 담아주기
+		List<CategoryVo> categoryVo = categoryService.findById(blogId);
+		model.addAttribute("category", categoryVo);
 		
 		return "/blog/blog-main";
 	}
@@ -74,6 +76,7 @@ public class BlogController {
 		
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
+		// 나중에 바꿔야 함
 		
 		return "/blog/blog-admin-basic";
 	}
@@ -82,11 +85,12 @@ public class BlogController {
 	@GetMapping("{blogId}/admin/category")
 	public String category(@PathVariable("blogId") String blogId, Model model) {
 		
-		List<CategoryVo> categoryVo = categoryService.findById(blogId);
-		model.addAttribute("list", categoryVo);
-		
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
+		// 나중에 바꿔야 함
+		
+		List<CategoryVo> categoryVo = categoryService.findById(blogId);
+		model.addAttribute("list", categoryVo);
 		
 		return "/blog/blog-admin-category";
 	}
@@ -95,11 +99,12 @@ public class BlogController {
 	@GetMapping("{blogId}/admin/write")
 	public String write(@PathVariable("blogId") String blogId, Model model) {
 		
-		List<CategoryVo> categoryVo = categoryService.findById(blogId);
-		model.addAttribute("list", categoryVo);
-		
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
+		// 나중에 바꿔야 함
+		
+		List<CategoryVo> categoryVo = categoryService.findById(blogId);
+		model.addAttribute("list", categoryVo);
 		
 		return "/blog/blog-admin-write";
 	}
@@ -109,11 +114,8 @@ public class BlogController {
 	public String write(@PathVariable("blogId") String blogId, PostVo postVo) {
 		
 		postVo.setUser_id(blogId);
-		System.out.println("===");
-		System.out.println(postVo);
-		int a = postService.write(postVo);
-		System.out.println(a);
-		System.out.println("===");
+		postService.write(postVo);
+		
 		return "/blog/blog-admin-write";
 	}
 }

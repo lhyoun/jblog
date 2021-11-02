@@ -29,4 +29,9 @@ public class PostRepository {
 		return sqlSession.selectList("post.findAllById", id);
 	}
 
+	public PostVo findByNo(Long postId) {
+		
+		return sqlSession.selectOne("post.findByNo", postId);
+	}
+
 }

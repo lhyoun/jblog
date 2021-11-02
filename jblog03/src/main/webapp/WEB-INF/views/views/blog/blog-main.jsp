@@ -18,15 +18,17 @@
 			<div id="content">
 				<!-- 상단 게시물 내용 -->
 				<div class="blog-content">
-					<h4>${postVo.title }</h4>
+					<h4>[${postVo.category_no }]${postVo.title }</h4>
 					<p>
 						${postVo.contents }
 					<p>
 				</div>
+				<hr style='border: 0; height: 1px;
+  							background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));'/>
 				<!-- 하단 게시물 목록 -->
 				<ul class="blog-list">
 					<c:forEach items='${list }' var='postVo' varStatus='status'>
-						<li><a href="">${postVo.title }</a> <span>${postVo.reg_date }</span></li>
+						<li><a href="${pageContext.request.contextPath}/${authUser.id}/${postVo.no}">${postVo.title }</a> <span>${postVo.reg_date }</span></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -41,18 +43,14 @@
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
-				<li><a href="">닥치고 스프링</a></li>
-				<li><a href="">스프링 스터디</a></li>
-				<li><a href="">스프링 프로젝트</a></li>
-				<li><a href="">기타</a></li>
+				<c:forEach items='${category }' var='category' varStatus='status'>
+					<li><a href="${pageContext.request.contextPath}/${authUser.id }/1/${category.no }">${category.name }</a></li>
+				</c:forEach>
 			</ul>
 		</div>
 		
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/views/includes/footer.jsp" />
+		
 	</div>
 </body>
 </html>

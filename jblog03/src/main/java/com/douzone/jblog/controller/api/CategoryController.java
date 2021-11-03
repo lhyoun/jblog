@@ -18,8 +18,8 @@ import com.douzone.jblog.vo.CategoryVo;
 /* 해당 File에 대한 설명
    Jblog의 Category관련 APIContoller
 
-   - 11/3 카테고리 추가 : user_id 받아와서 넣어줘야 함 -> 완료
-          카테고리 삭제 : 완료 -> 해당 카테고리의 post 처리 필요
+   - 11/3 카테고리 추가 : user_id 받아와서 넣어줘야 함 -> 완료 / insert 후 화면 table 번호 안됨 
+          카테고리 삭제 : 완료 -> 해당 카테고리의 post 처리 필요 / delete 후 화면 처리 안됨
           공통 : return type을 JsonResult로 수정해야 함 -> 완료
 
 */

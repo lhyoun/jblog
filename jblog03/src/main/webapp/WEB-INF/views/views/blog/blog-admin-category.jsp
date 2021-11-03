@@ -40,7 +40,7 @@ $(function(){
 					alert('추가되었습니다');
 					
 					$('#mytable > tbody:last').append(
-					  '<td>-</td>'
+					  '<td>new</td>'
 					+ '<td>' + $('#name').val() + '</td>'
 					+ '<td>0</td>'
 					+ '<td>' + $('#desc').val() + '</td>'

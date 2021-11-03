@@ -19,7 +19,7 @@
 				
 				<c:import url="/WEB-INF/views/views/includes/navigation3.jsp" />
 				
-				<form action="" method="post">
+				<form action="${pageContext.request.contextPath}/${blogVo.id }/admin/basic" method="post">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
@@ -43,7 +43,7 @@
 		</div>
 		
 		<c:import url="/WEB-INF/views/views/includes/footer.jsp" />
-
+		
 	</div>
 </body>
 </html>

@@ -89,6 +89,17 @@ public class BlogController {
 		return "/blog/blog-admin-basic";
 	}
 	
+	// 블로그 관리 기본설정 변경
+	@PostMapping("{blogId}/admin/basic")
+	public String updateAdmin(@PathVariable("blogId") String blogId, BlogVo blogVo) {
+		
+		System.out.println("===");
+		System.out.println(blogVo);
+		System.out.println("===");
+		
+		return "redirect:/" + blogId + "/admin/basic";
+	}
+	
 	/**
 	 *  카테고리(insert, delete는 API Controller) 
 	 */
@@ -122,7 +133,7 @@ public class BlogController {
 		
 		return "/blog/blog-admin-write";
 	}
-	
+
 	// 블로그 글쓰기
 	@PostMapping("{blogId}/admin/write")
 	public String write(@PathVariable("blogId") String blogId, PostVo postVo) {

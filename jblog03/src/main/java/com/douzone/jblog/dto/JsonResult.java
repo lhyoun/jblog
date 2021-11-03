@@ -52,12 +52,7 @@ public class JsonResult {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
+	//
 	
 	
 	private JsonResult(Object data) {

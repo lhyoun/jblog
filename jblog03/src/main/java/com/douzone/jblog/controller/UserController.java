@@ -22,6 +22,11 @@ import com.douzone.jblog.vo.UserVo;
 
    - 10/30 회원가입 폼/진행/성공 
            로그인 화면으로 이동 *login/logout은 security-Login(out)Interceptor서 진행하고 경로는 spring-servlet에서 설정. 현재는 /user/auth, /user/logout
+   - 11/3  회원가입 : Valid관련 error 발생하면 화면에서 처리 안됨
+           로그인 : 완료
+           로그아웃 : 완료
+           회원가입 성공 페이지 / 로그인 페이지 : 수정 필요 
+    
 */
 
 @Controller
@@ -44,7 +49,6 @@ public class UserController {
 	*/ 
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result, Model model) {
-		System.out.println("join");
 		
 		if(result.hasErrors()) {
 			List<ObjectError> list = result.getAllErrors();
@@ -73,24 +77,4 @@ public class UserController {
 		return "user/login";
 	}
 	
-	/*
-	@Auth
-	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(@AuthUser UserVo authUser, Model model) {
-		UserVo userVo = userService.getUser(authUser.getNo());
-		model.addAttribute("userVo", userVo);
-		
-		return "user/update";
-	}	
-
-	@Auth
-	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(@AuthUser UserVo authUser, UserVo userVo) {
-		userVo.setNo(authUser.getNo());
-
-		userService.updateUser(userVo);
-		authUser.setName(userVo.getName());
-		
-		return "redirect:/user/update";
-	}	*/
 }

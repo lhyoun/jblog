@@ -9,6 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.jblog.dto.JsonResult;
 import com.douzone.jblog.service.UserService;
 
+/* 해당 File에 대한 설명
+   Jblog의 User관련 APIContoller
+
+   - 11/3 blogId 중복체크 완료
+ 
+*/
+
 @RestController("userApiController")
 @RequestMapping("/user/api")
 public class UserController {
@@ -16,9 +23,7 @@ public class UserController {
 	private UserService userService;
 	
 	@GetMapping("/checkId")
-	public JsonResult checkemail(@RequestParam(value="blogId", required=true, defaultValue="") String blogId) {
-		
-		System.out.println(userService.getUser(blogId));
+	public JsonResult checkId(@RequestParam(value="blogId", required=true, defaultValue="") String blogId) {
 		
 		return JsonResult.SelectTest(userService.getUser(blogId));
 	}

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.CategoryService;
@@ -25,7 +24,10 @@ import com.douzone.jblog.vo.PostVo;
            블로그 관리 화면, 카테고리, 글쓰기. * 이것도 유저 받아와야 함. @Auth 설정 필요
    - 10/31 블로그 메인화면 완료, 관리 화면, 카테고리, 글쓰기 유저 받아오기 및 path 설정 완료
    - 11/2  블로그 header, footer 1회만 application이나 session에 담아두도록 변경하기
-                
+   - 11/3  글쓰기 : 완료
+           카테고리 : 카테고리 추가는 되는데 추가 후 화면 랜더링 안됨 / 카테고리 삭제 안됨
+           기본설정 :      
+           블로그정보 매번 받아오는데 한 번만 받아오게 수정해야 함
 */
 
 @Controller
@@ -46,6 +48,9 @@ public class BlogController {
 		return "main/index";
 	}	
 	
+	/**
+	 *  블로그 메인 
+	 */
 	// 블로그 메인화면으로 이동
 	@GetMapping("{blogId}/{postId}")
 	public String main(@PathVariable("blogId") String blogId, @PathVariable("postId") Long postId, Model model ) {
@@ -70,6 +75,9 @@ public class BlogController {
 		return "/blog/blog-main";
 	}
 	
+	/**
+	 *  기본설정 
+	 */
 	// 블로그 관리화면으로 이동
 	@GetMapping("{blogId}/admin/basic")
 	public String admin(@PathVariable("blogId") String blogId, Model model) {
@@ -81,6 +89,9 @@ public class BlogController {
 		return "/blog/blog-admin-basic";
 	}
 	
+	/**
+	 *  카테고리(insert, delete는 API Controller) 
+	 */
 	// 블로그 카테고리 관리화면으로 이동
 	@GetMapping("{blogId}/admin/category")
 	public String category(@PathVariable("blogId") String blogId, Model model) {
@@ -95,6 +106,9 @@ public class BlogController {
 		return "/blog/blog-admin-category";
 	}
 	
+	/**
+	 *  글작성
+	 */
 	// 블로그 글쓰기 화면으로 이동
 	@GetMapping("{blogId}/admin/write")
 	public String write(@PathVariable("blogId") String blogId, Model model) {

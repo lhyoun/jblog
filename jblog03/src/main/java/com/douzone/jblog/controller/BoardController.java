@@ -18,6 +18,8 @@ import com.douzone.jblog.vo.BoardVo;
 import com.douzone.jblog.vo.UserVo;
 import com.douzone.web.util.WebUtil;
 
+// sample file
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {

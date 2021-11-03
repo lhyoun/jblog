@@ -21,10 +21,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
-		System.out.println("get 전");
 		UserVo authUser = userService.getUser(id, password);
-		System.out.println("get 후");
-		System.out.println(authUser);
 		
 		if(authUser == null) {
 			request.setAttribute("result", "fail");

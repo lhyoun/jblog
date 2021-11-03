@@ -16,10 +16,11 @@ $(function(){
 	$("#btn-addCategory").click(() => {
 		var name = $("#name").val();
 		var desc = $("#desc").val();
+		var blog_id = $("#blog_id").val();
 		
-		console.log('==', name, desc, '==');
+		console.log('==', name, desc, blog_id, '==');
 		
-		if(name == '' || desc == '') {
+		if(name == '' || desc == '' || blog_id == '') {
 			return;
 		}
 		
@@ -28,16 +29,26 @@ $(function(){
 			type: "post",
 			dataType: "json",
 			contentType: 'application/json',
-			data: JSON.stringify({name:$('#name').val(), desc:$('#desc').val()}),
+			data: JSON.stringify({name:name, desc:desc, blog_id:blog_id}),
 			error: function(xhr, status, e) {
 				console.log(status, e);
 			},
 			success: function(response) {
 				console.log(response);
 				
-				
-				if(response == "성공") {
-					alert(response);
+				if(response.result == "success") {
+					alert('추가되었습니다');
+					
+					$('#mytable > tbody:last').append(
+					  '<td>-</td>'
+					+ '<td>' + $('#name').val() + '</td>'
+					+ '<td>0</td>'
+					+ '<td>' + $('#desc').val() + '</td>'
+					+ '<td><img onclick="delete_category(1);" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>');
+					
+					$('#name').val('');
+					$('#desc').val('');
+					
 					return;
 				}
 				
@@ -50,10 +61,29 @@ $(function(){
 <script type="text/javascript"> 
 
 	var delete_category = (no)=>{
-		alert(no);
-	};
-      
-
+		let imgObj = $(this);
+		$.ajax({
+			url: "${pageContext.request.contextPath }/category/api/delete/"+no,
+			type: "delete",
+			error: function(xhr, status, e) {
+				console.log(status, e);
+			},
+			success: function(response) {
+				
+				if(response.result == "success") {
+					alert('삭제되었습니다');
+					
+					//$(this).parent().parent().remove();
+					//$(imgObj).parent().parent().remove();
+					$(this).parent().remove();
+					
+					return;
+				}
+				
+			}
+				
+		})
+	};		 
 </script> 
 </head>
 <body>
@@ -68,7 +98,7 @@ $(function(){
 				
 				
 				
-		      	<table class="admin-cat">
+		      	<table id="mytable" class="admin-cat">
 		      		<tr>
 		      			<th>번호</th>
 		      			<th>카테고리명</th>
@@ -109,7 +139,7 @@ $(function(){
 		</div>
 		
 		<c:import url="/WEB-INF/views/views/includes/footer.jsp" />
-		
+		<input type="hidden" id="blog_id" name="blog_id" value="${blogVo.id }">
 	</div>
 </body>
 </html>

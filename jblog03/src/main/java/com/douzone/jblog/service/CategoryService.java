@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.douzone.jblog.repository.BlogRepository;
 import com.douzone.jblog.repository.CategoryRepository;
-import com.douzone.jblog.vo.BlogVo;
-import com.douzone.jblog.vo.BoardVo;
 import com.douzone.jblog.vo.CategoryVo;
 
 @Service

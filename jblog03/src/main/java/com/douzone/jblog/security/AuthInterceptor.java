@@ -39,35 +39,39 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 		
-		//6. @Auth가 적용이 되어 있기 때문에 인증(Authenfication) 여부 확인
+		/*  인증이 필요한 경우
+		    1. 로그인을 했는지 check => myblog
+		    2. 로그인을 했고, 블로그의 주인이 맞는지 check => blog 관리
+            2가지 경우가 있는데 각각을 type 1, 2로 구분
+            
+            type 1 : 로그인 여부만 체크
+            type 2 : 로그인 여부 체크 후 블로그 주인 여부 체크  */
+		
 		HttpSession session = request.getSession();
 		if(session == null) {
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
+		// type 1. 세션에서 로그인 여부 체크 
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if(authUser == null) {
+			// 로그인이 안 된 경우 로그인 페이지로 이동
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
 		
-		//7. 권한(Authorization) 체크를 위해서 @Auth의 role 가져오기("USER", "ADMIN")
-		String role = auth.role();
+		// type 2. type을 받아와서 2인 경우만 해당 
+		int type = auth.type();
+		//String user_id = auth.user_id();
+		String user_id = request.getRequestURI().split("/")[2];
 		
-		//8. @Auth의 role이 "USER" 인 경우, authUser의 role은 상관없다.
-		if("USER".equals(role)) {
-			return true;
+		if(type == 2) {
+			if(!authUser.getId().equals(user_id)) {
+				response.sendRedirect(request.getContextPath());
+				return false;
+			}
 		}
 		
-		//9.@Auth의 role이 "ADMIN" 인 경우, authUser의 role은 "ADMIN" 이어야 한다.
-		if("ADMIN".equals(authUser.getRole()) == false) {
-			response.sendRedirect(request.getContextPath());
-			return false;
-		}
-		
-		// 옳은 관리자 권한
-		// @Auth의 role: "ADMIN"
-		// authUser의 role: "ADMIN"
 		return true;
 	}
 }

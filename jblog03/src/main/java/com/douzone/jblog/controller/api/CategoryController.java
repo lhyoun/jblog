@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.jblog.dto.JsonResult;
+import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.vo.CategoryVo;
 
@@ -21,6 +22,7 @@ import com.douzone.jblog.vo.CategoryVo;
    - 11/3 카테고리 추가 : user_id 받아와서 넣어줘야 함 -> 완료 / insert 후 화면 table 번호 안됨 
           카테고리 삭제 : 완료 -> 해당 카테고리의 post 처리 필요 / delete 후 화면 처리 안됨
           공통 : return type을 JsonResult로 수정해야 함 -> 완료
+   - 11/4 권한 : uri에 blog_id를 넣어줘야 함
 
 */
 
@@ -31,6 +33,7 @@ public class CategoryController {
 	private CategoryService categoryService;
 	
 	// 카테고리 추가
+	//@Auth(type=2)
 	@PostMapping("/add")
 	public JsonResult addCategory(@RequestBody CategoryVo vo) {
 		
@@ -38,6 +41,7 @@ public class CategoryController {
 	}
 
 	// 카테고리 삭제
+	//@Auth(type=2)
 	@DeleteMapping("/delete/{no}")
 	public JsonResult deleteCategory(@PathVariable("no") int no) {
 		System.out.println("aaaaa");

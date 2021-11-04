@@ -51,7 +51,6 @@ $(function(){
 					
 					return;
 				}
-				
 			}
 		});		 
 	});
@@ -79,9 +78,7 @@ $(function(){
 					
 					return;
 				}
-				
 			}
-				
 		})
 	};		 
 </script> 
@@ -96,8 +93,6 @@ $(function(){
 			
 				<c:import url="/WEB-INF/views/views/includes/navigation3.jsp" />
 				
-				
-				
 		      	<table id="mytable" class="admin-cat">
 		      		<tr>
 		      			<th>번호</th>
@@ -111,12 +106,11 @@ $(function(){
 						<tr>
 							<td>${status.index+1 }</td>
 							<td>${vo.name }</td>
-							<td>게시물수조인해서가져오기</td>
+							<td>${vo.cnt }</td>
 							<td>${vo.desc }</td>
 							<td><img onclick="delete_category(${vo.no});" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
 						</tr>  
 					</c:forEach>
-					
 									  
 				</table>
       	

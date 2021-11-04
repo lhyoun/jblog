@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.douzone.jblog.vo.BlogVo;
 import com.douzone.jblog.vo.BoardVo;
 import com.douzone.jblog.vo.CategoryVo;
+import com.douzone.jblog.vo.dto.CategoryDto;
 
 @Repository
 public class CategoryRepository {
@@ -29,6 +30,11 @@ public class CategoryRepository {
 	public int delete(int no) {
 		
 		return sqlSession.delete("category.delete", no);
+	}
+
+	public List<CategoryDto> findDtoByBlogId(String blogId) {
+		
+		return sqlSession.selectList("category.findDtoByBlogId", blogId);
 	}
 
 }

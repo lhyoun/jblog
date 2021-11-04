@@ -15,6 +15,11 @@ public class BlogService {
 		
 		return blogRepository.findById(id);
 	}
+	
+	public boolean updateBlog(BlogVo vo) {
+		
+		return blogRepository.updateBlog(vo);
+	}
 
 
 }

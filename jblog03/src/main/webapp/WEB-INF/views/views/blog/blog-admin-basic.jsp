@@ -19,7 +19,7 @@
 				
 				<c:import url="/WEB-INF/views/views/includes/navigation3.jsp" />
 				
-				<form action="${pageContext.request.contextPath}/${blogVo.id }/admin/basic" method="post">
+				<form action="${pageContext.request.contextPath}/${blogVo.id }/admin/basic" method="post" enctype="multipart/form-data">
 	 		      	<table class="admin-config">
 			      		<tr>
 			      			<td class="t">블로그 제목</td>
@@ -27,7 +27,7 @@
 			      		</tr>
 			      		<tr>
 			      			<td class="t">로고이미지</td>
-			      			<td><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>      			
+			      			<td><img src="${pageContext.request.contextPath }${blogVo.logo }"></td>      			
 			      		</tr>      		
 			      		<tr>
 			      			<td class="t">&nbsp;</td>

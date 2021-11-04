@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.jblog.repository.CategoryRepository;
 import com.douzone.jblog.vo.CategoryVo;
+import com.douzone.jblog.vo.dto.CategoryDto;
 
 @Service
 public class CategoryService {
@@ -25,6 +26,11 @@ public class CategoryService {
 	public boolean deleteCategory(int no) {
 		return categoryRepository.delete(no) == 1;
 		
+	}
+
+	public List<CategoryDto> findDtoById(String blogId) {
+
+		return categoryRepository.findDtoByBlogId(blogId);
 	}
 	
 }

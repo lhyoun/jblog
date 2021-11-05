@@ -29,7 +29,10 @@
 				<h4 style='padding: 10px; font-size: 1.3em; color: #9D96D0;'> 카테고리: 모든 카테고리 </h4>
 				<ul class="blog-list">
 					<c:forEach items='${list }' var='postVo' varStatus='status'>
-						<li><a href="${pageContext.request.contextPath}/${authUser.id}/${postVo.no}">${postVo.title }</a> <span>${postVo.reg_date }</span></li>
+						<li>
+							<a href="${pageContext.request.contextPath}/${blogVo.id }/${postVo.no}/1">${postVo.title }</a> 
+							<span>${postVo.reg_date }</span>
+						</li>
 					</c:forEach>
 				</ul>
 				
@@ -37,14 +40,28 @@
 				<div class="pager">
 					<ul>
 						<li><a href="">◀</a></li>
-						<li class="selected"><a href="">1</a></li>
-						<li>2</li>
-						<li><a href="">3</a></li>
-						<li>4</li>
-						<li>5</li>
+						
+						<c:forEach var="num" begin="${page.startPage }" end="${page.endPage }" >
+							<c:choose>
+								<c:when test="${page.pageNum == num}">
+									<li class="selected"> ${num } </li>
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${page.realEnd >= num}">
+											<li><a href="${pageContext.request.contextPath }/${blogVo.id }/1/${num }">${num }</a></li>
+										</c:when>
+										<c:otherwise>
+												<li>${num }</li>
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
 						<li><a href="">▶</a></li>
 					</ul>
-				</div>
+				</div>			
 									
 				<br/>
 			</div>
@@ -52,7 +69,7 @@
 
 		<div id="extra">
 			<div class="blog-logo">
-				<img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+				<img src="${pageContext.request.contextPath }${blogVo.logo }">
 			</div>
 		</div>
 
@@ -60,7 +77,8 @@
 			<h2>카테고리</h2>
 			<ul>
 				<c:forEach items='${category }' var='category' varStatus='status'>
-					<li><a href="${pageContext.request.contextPath}/${authUser.id }/1/${category.no }">${category.name }</a></li>
+																	<!-- 블로그ID/postID/page/categoryNo -->
+					<li><a href="${pageContext.request.contextPath}/${authUser.id }/1/1/${category.no }">${category.name }</a></li>
 				</c:forEach>
 			</ul>
 		</div>

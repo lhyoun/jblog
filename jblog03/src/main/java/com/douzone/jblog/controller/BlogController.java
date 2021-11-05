@@ -1,6 +1,8 @@
 package com.douzone.jblog.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.jblog.dto.Page;
 import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.service.BlogService;
 import com.douzone.jblog.service.CategoryService;
@@ -35,6 +37,7 @@ import com.douzone.jblog.vo.dto.CategoryDto;
            기본설정 :      
            블로그정보 매번 받아오는데 한 번만 받아오게 수정해야 함
    - 11/4  권한 : 완료
+   - 11/5  페이징 : 완료 (화면에서 게시글 클릭 시 현재 페이지 넘겨줘야 함)
 */
 
 @Controller
@@ -62,17 +65,17 @@ public class BlogController {
 	 *  블로그 메인 
 	 */
 	// 블로그 메인화면으로 이동
-	@GetMapping("{blogId}/{postId}")
-	public String main(@PathVariable("blogId") String blogId, @PathVariable("postId") Long postId, Model model ) {
+	@GetMapping("{blogId}/{postId}/{page}/{category_no}")
+	public String main(@PathVariable("blogId") String blogId, 
+			           @PathVariable("postId") Long postId, 
+			           @PathVariable("page") int page,
+			           @PathVariable("category_no") int category_no,
+			           Model model ) {
 		
 		// blogId로 id, title, logo 받아옴
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
 		// 나중에 바꿔야 함		
-		
-		// blogId로 포스트 찾아서 담아주기
-		List<PostVo> postVoList = postService.findAllById(blogId);
-		model.addAttribute("list", postVoList);
 		
 		// postId로 상단에 보여줄 게시물 담아주기
 		PostVo postVo = postService.findByNo(postId);
@@ -81,6 +84,21 @@ public class BlogController {
 		// blogId로 우측에 보여줄 카테고리 담아주기
 		List<CategoryVo> categoryVo = categoryService.findById(blogId);
 		model.addAttribute("category", categoryVo);
+		
+		// category에 따른 게시글 목록 및 페이징
+		int count = postService.getCount(blogId); // 페이징을 위한 전체 게시글 수
+		Page pageInfo = new Page(page, count);
+		model.addAttribute("page", pageInfo); // 페이징 정보 담아주기
+		
+		int p = pageInfo.getNum(); // select limit를 위한 페이징 정보
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "id", blogId );
+		map.put( "p", p );
+		map.put( "c", category_no==0? "%" : category_no );
+		
+		List<PostVo> postVoList = postService.findAllById(map);
+		model.addAttribute("list", postVoList);
 		
 		return "/blog/blog-main";
 	}

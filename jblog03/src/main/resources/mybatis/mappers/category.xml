@@ -16,7 +16,7 @@
 		SELECT a.no, a.name, a.desc, a.blog_id, count(b.category_no) as cnt
 		FROM   category as a
 		LEFT   JOIN post as b ON a.no = b.category_no
-		GROUP  BY b.category_no 
+		GROUP  BY a.no 
 		HAVING blog_id=#{blog_id }
 		ORDER  BY a.no asc
 		]]>

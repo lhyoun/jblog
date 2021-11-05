@@ -18,12 +18,22 @@
 		]]>
 	</select>
 
-	<select id="findAllById" parameterType="string" resultType="postvo">
+	<select id="findAllById" parameterType="map" resultType="postvo">
 		<![CDATA[
 		select no, title, contents, reg_date, category_no, user_id
 		  from post
 		 where user_id=#{id }
+		 and   category_no like #{c}
 		 order by reg_date desc
+		 limit #{p }, 5
+		]]>
+	</select>
+	
+	<select id="getCount" parameterType="string" resultType="integer">
+		<![CDATA[
+		select count(*) 
+		from   post 
+		where  user_id = #{user_id }
 		]]>
 	</select>
 

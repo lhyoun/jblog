@@ -30,8 +30,8 @@ public class PostRepository {
 	}
 	
 	// user의 게시글 수
-	public int getCount(String user_id) {
-		return sqlSession.selectOne("post.getCount", user_id);
+	public int getCount(Map<String, Object> map) {
+		return sqlSession.selectOne("post.getCount", map);
 	}
 	
 	// 글쓰기

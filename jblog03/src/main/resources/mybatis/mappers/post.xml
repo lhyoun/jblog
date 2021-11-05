@@ -29,11 +29,12 @@
 		]]>
 	</select>
 	
-	<select id="getCount" parameterType="string" resultType="integer">
+	<select id="getCount" parameterType="map" resultType="integer">
 		<![CDATA[
 		select count(*) 
 		from   post 
-		where  user_id = #{user_id }
+		where  category_no like #{c } 
+		and    user_id = #{user_id }
 		]]>
 	</select>
 

@@ -29,8 +29,8 @@ public class PostService {
 	}
 
 	// user의 게시글 수
-	public int getCount(String user_id) {
-		return postRepository.getCount(user_id);
+	public int getCount(Map<String, Object> map) {
+		return postRepository.getCount(map);
 	}
 	
 	// 글쓰기

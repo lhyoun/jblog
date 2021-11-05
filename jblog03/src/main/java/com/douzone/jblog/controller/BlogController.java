@@ -85,20 +85,36 @@ public class BlogController {
 		List<CategoryVo> categoryVo = categoryService.findById(blogId);
 		model.addAttribute("category", categoryVo);
 		
-		// category에 따른 게시글 목록 및 페이징
-		int count = postService.getCount(blogId); // 페이징을 위한 전체 게시글 수
+		// category에 따른 게시글 목록 및 페이징 
+		Map<String, Object> map1 = new HashMap<String, Object>();
+		map1.put( "user_id", blogId );
+		map1.put( "c", category_no==0? "%" : category_no );
+		
+		int count = postService.getCount(map1); // 페이징을 위한 전체 게시글 수 (category, blogId)
+		
 		Page pageInfo = new Page(page, count);
 		model.addAttribute("page", pageInfo); // 페이징 정보 담아주기
 		
 		int p = pageInfo.getNum(); // select limit를 위한 페이징 정보
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "id", blogId );
-		map.put( "p", p );
-		map.put( "c", category_no==0? "%" : category_no );
+		Map<String, Object> map2 = new HashMap<String, Object>();
+		map2.put( "id", blogId );
+		map2.put( "p", p );
+		map2.put( "c", category_no==0? "%" : category_no );
 		
-		List<PostVo> postVoList = postService.findAllById(map);
+		String category_name = "모든 카테고리";
+		
+		for(CategoryVo catVo : categoryVo) {
+			if(catVo.getNo()==category_no) {
+				category_name = catVo.getName();
+				break;
+			}
+		}
+		
+		List<PostVo> postVoList = postService.findAllById(map2);
 		model.addAttribute("list", postVoList);
+		model.addAttribute("category_name", category_name);
+		model.addAttribute("category_no", category_no);
 		
 		return "/blog/blog-main";
 	}

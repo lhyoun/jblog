@@ -18,7 +18,7 @@
 			<div id="content">
 				<!-- 상단 게시물 내용 -->
 				<div class="blog-content">
-					<h4>[카테고리]${postVo.title }</h4>
+					<h4>${postVo.title }</h4>
 					<p>
 						${postVo.contents }
 					<p>
@@ -26,7 +26,7 @@
 				<!-- 하단 게시물 목록 -->
 				<hr style='border: 0; height: 1px;
 	  							background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));'/>
-				<h4 style='padding: 10px; font-size: 1.3em; color: #9D96D0;'> 카테고리: 모든 카테고리 </h4>
+				<h4 style='padding: 10px; font-size: 1.3em; color: #9D96D0;'> 카테고리: ${category_name } </h4>
 				<ul class="blog-list">
 					<c:forEach items='${list }' var='postVo' varStatus='status'>
 						<li>
@@ -49,7 +49,8 @@
 								<c:otherwise>
 									<c:choose>
 										<c:when test="${page.realEnd >= num}">
-											<li><a href="${pageContext.request.contextPath }/${blogVo.id }/1/${num }">${num }</a></li>
+																							<!-- 블로그ID/postID/page/categoryNo -->
+											<li><a href="${pageContext.request.contextPath }/${blogVo.id }/1/${num }/${category_no }">${num }</a></li>
 										</c:when>
 										<c:otherwise>
 												<li>${num }</li>
@@ -68,17 +69,23 @@
 		</div>
 
 		<div id="extra">
+			<br/>
 			<div class="blog-logo">
 				<img src="${pageContext.request.contextPath }${blogVo.logo }">
 			</div>
 		</div>
 
 		<div id="navigation">
-			<h2>카테고리</h2>
+			<br/>
+			<hr style='border: 0; height: 1px;
+	  			background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));'/>
+			<br/>
+			<h2 style='color:#9D96D0;'>카테고리</h2>
 			<ul>
+				<li><a href="${pageContext.request.contextPath}/${blogVo.id }/1/1/0">모든 카테고리</a></li>
 				<c:forEach items='${category }' var='category' varStatus='status'>
 																	<!-- 블로그ID/postID/page/categoryNo -->
-					<li><a href="${pageContext.request.contextPath}/${authUser.id }/1/1/${category.no }">${category.name }</a></li>
+					<li><a href="${pageContext.request.contextPath}/${blogVo.id }/1/1/${category.no }">${category.name }</a></li>
 				</c:forEach>
 			</ul>
 		</div>

@@ -4,7 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 		<div id="header">
-			<a href="${pageContext.request.contextPath }/${authUser.id }/1"><h1>${blogVo.title }</h1></a>
+											<!-- 블로그ID/postID/page/categoryNo -->
+			<a href="${pageContext.request.contextPath }/${authUser.id }/1/1/0"><h1>${blogVo.title }</h1></a>
 			<ul>
 				<c:choose>
 					<c:when test="${empty authUser }">

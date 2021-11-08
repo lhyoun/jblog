@@ -25,7 +25,7 @@ public class ControllerExceptionHandler {
 		HttpServletResponse response,
 		Exception e) throws Exception {
 		
-		System.out.println("!!!!!!!!!!!!!!!!!!!!");
+		System.out.println("== ControllerExceptionHandler ==");
 		// 1. 로깅
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));

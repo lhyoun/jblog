@@ -171,7 +171,7 @@ public class BlogController {
 		
 		List<CategoryDto> categoryVo = categoryService.findDtoById(blogId);
 		model.addAttribute("list", categoryVo);
-		System.out.println("asd2");
+		System.out.println("asd3");
 		
 		return "/blog/blog-admin-category";
 	}

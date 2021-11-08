@@ -36,6 +36,7 @@
 			      		</tr>
 			      		<tr>
 			      			<td class="t">내용</td>
+			      			<!-- rows="2" cols="20" wrap="hard" -->
 			      			<td><textarea name="contents"></textarea></td>
 			      		</tr>
 			      		<tr>

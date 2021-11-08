@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<% pageContext.setAttribute("newline", "\n"); %>
 </head>
 <body>
 	<div id="container">
@@ -19,9 +20,10 @@
 				<!-- 상단 게시물 내용 -->
 				<div class="blog-content">
 					<h4>${postVo.title }</h4>
-					<p>
-						${postVo.contents }
-					<p>
+					<div>
+						<br/>
+						${fn:replace(postVo.contents, newline, "<br/>")}
+					</div>
 				</div>
 				<!-- 하단 게시물 목록 -->
 				<hr style='border: 0; height: 1px;

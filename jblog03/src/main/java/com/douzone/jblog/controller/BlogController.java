@@ -78,7 +78,10 @@ public class BlogController {
 		// 나중에 바꿔야 함		
 		
 		// postId로 상단에 보여줄 게시물 담아주기
-		PostVo postVo = postService.findByNo(postId);
+		PostVo inputVo = new PostVo();
+		inputVo.setNo(postId);
+		inputVo.setUser_id(blogId);
+		PostVo postVo = postService.findByNo(inputVo);
 		model.addAttribute("postVo", postVo);
 		
 		// blogId로 우측에 보여줄 카테고리 담아주기
@@ -159,13 +162,16 @@ public class BlogController {
 	@Auth(type=2)
 	@GetMapping("{blogId}/admin/category")
 	public String category(@PathVariable("blogId") String blogId, Model model) {
+		System.out.println("asd");
 		
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
 		// 나중에 바꿔야 함
+		System.out.println("asd2");
 		
 		List<CategoryDto> categoryVo = categoryService.findDtoById(blogId);
 		model.addAttribute("list", categoryVo);
+		System.out.println("asd2");
 		
 		return "/blog/blog-admin-category";
 	}

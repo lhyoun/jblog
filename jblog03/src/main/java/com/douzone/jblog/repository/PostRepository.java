@@ -25,8 +25,8 @@ public class PostRepository {
 	}
 	
 	// 게시글 no로 하나의 게시글
-	public PostVo findByNo(Long postId) {
-		return sqlSession.selectOne("post.findByNo", postId);
+	public PostVo findByNo(PostVo inputVo) {
+		return sqlSession.selectOne("post.findByNo", inputVo);
 	}
 	
 	// user의 게시글 수

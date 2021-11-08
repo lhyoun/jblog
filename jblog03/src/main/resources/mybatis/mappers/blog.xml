@@ -19,4 +19,15 @@
 		]]>	
 	</update>
 	
+		<insert id="join" parameterType="blogvo">
+
+			<![CDATA[
+			insert
+			  into blog
+			values ( #{id },
+					 #{title },
+					 #{logo } )
+			]]>
+
+	</insert>
 </mapper>

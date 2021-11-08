@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -14,7 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.douzone.jblog.service.BlogService;
+import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.service.UserService;
+import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.CategoryVo;
 import com.douzone.jblog.vo.UserVo;
 
 /* 해당 File에 대한 설명
@@ -34,6 +39,12 @@ import com.douzone.jblog.vo.UserVo;
 public class UserController {
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private BlogService blogService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	/* [Get]join => 회원가입Form
 	   @ModelAttribute UserVo vo는 [Post]join에서 Binding 문제가 생겨 다시 돌아올 경우
@@ -47,6 +58,7 @@ public class UserController {
 	/* [Post]join => 회원가입 진행
 	   단, BindingResult result에 문제가 있으면 User 정보를 가지고 다시 [Get]join으로 돌아간다
 	*/ 
+	@Transactional
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result, Model model) {
 		
@@ -62,6 +74,19 @@ public class UserController {
 		}
 		
 		userService.join(vo);
+		
+		BlogVo blogVo = new BlogVo();
+		blogVo.setId(vo.getId());
+		blogVo.setTitle(vo.getId()+"의 블로그");
+		blogVo.setLogo("/upload/images/default.jpg");
+		blogService.join(blogVo);
+		
+		CategoryVo categoryVo = new CategoryVo();
+		categoryVo.setBlog_id(vo.getId());
+		categoryVo.setDesc("미분류");
+		categoryVo.setName("미분류");
+		categoryService.addCategory(categoryVo);
+		
 		return "redirect:/user/joinsuccess";
 	}
 	

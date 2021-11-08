@@ -36,7 +36,6 @@ public class CategoryController {
 	//@Auth(type=2)
 	@PostMapping("/add")
 	public JsonResult addCategory(@RequestBody CategoryVo vo) {
-		
 		return JsonResult.notSelectTest(categoryService.addCategory(vo));
 	}
 

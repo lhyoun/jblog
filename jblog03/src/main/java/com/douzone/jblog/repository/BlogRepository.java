@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.jblog.vo.BlogVo;
+import com.douzone.jblog.vo.UserVo;
 
 @Repository
 public class BlogRepository {
@@ -19,6 +20,11 @@ public class BlogRepository {
 	public boolean updateBlog(BlogVo vo) {
 		
 		return sqlSession.update("blog.update", vo) == 1;
+	}
+
+	public int join(BlogVo blogVo) {
+		
+		return sqlSession.insert("blog.join", blogVo);
 	}
 	
 

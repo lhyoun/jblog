@@ -24,8 +24,8 @@ public class PostService {
 	}
 
 	// 게시글 no로 하나의 게시글
-	public PostVo findByNo(Long postId) {
-		return postRepository.findByNo(postId);
+	public PostVo findByNo(PostVo inputVo) {
+		return postRepository.findByNo(inputVo);
 	}
 
 	// user의 게시글 수

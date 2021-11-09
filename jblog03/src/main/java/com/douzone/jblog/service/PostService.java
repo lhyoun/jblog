@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.douzone.jblog.repository.PostRepository;
 import com.douzone.jblog.vo.PostVo;
@@ -13,6 +14,11 @@ import com.douzone.jblog.vo.PostVo;
 public class PostService {
 	@Autowired
 	private PostRepository postRepository;
+	
+	// 블로그 메인화면에 보여줄 게시물 (1개)
+	public PostVo getMainPost(Map<String, Object> postVoMap) {
+		return postRepository.findByNo(postVoMap);
+	}
 
 	public List<PostVo> findAllById(Map<String, Object> map) {
 		return postRepository.findAllById(map);
@@ -21,11 +27,6 @@ public class PostService {
 	// user의 모든 게시글 (보류)
 	public PostVo findById(Long id) {
 		return postRepository.findById(id);
-	}
-
-	// 게시글 no로 하나의 게시글
-	public PostVo findByNo(PostVo inputVo) {
-		return postRepository.findByNo(inputVo);
 	}
 
 	// user의 게시글 수

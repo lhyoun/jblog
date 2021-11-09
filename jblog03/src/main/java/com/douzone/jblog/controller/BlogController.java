@@ -69,7 +69,7 @@ public class BlogController {
 	public String main(@PathVariable("blogId") String blogId, 
 			           @PathVariable("postId") Long postId, 
 			           @PathVariable("page") int page,
-			           @PathVariable("category_no") int category_no,
+			           @PathVariable("category_no") Long category_no,
 			           Model model ) {
 		
 		// blogId로 id, title, logo 받아옴
@@ -77,15 +77,16 @@ public class BlogController {
 		model.addAttribute("blogVo", blogVo);
 		// 나중에 바꿔야 함		
 		
-		// postId로 상단에 보여줄 게시물 담아주기
-		PostVo inputVo = new PostVo();
-		inputVo.setNo(postId);
-		inputVo.setUser_id(blogId);
-		PostVo postVo = postService.findByNo(inputVo);
+		// 블로그 메인화면에 보여줄 게시물 (1개)
+		Map<String, Object> postVoMap = new HashMap<String, Object>();
+		postVoMap.put( "no", postId == 0 ? "%" : postId );
+		postVoMap.put( "user_id", blogId );
+		postVoMap.put( "category_no", category_no == 0 ? "%" : category_no );
+		PostVo postVo = postService.getMainPost(postVoMap);
 		model.addAttribute("postVo", postVo);
 		
 		// blogId로 우측에 보여줄 카테고리 담아주기
-		List<CategoryVo> categoryVo = categoryService.findById(blogId);
+		List<CategoryVo> categoryVo = categoryService.getCategoryListByUserId(blogId);
 		model.addAttribute("category", categoryVo);
 		
 		// category에 따른 게시글 목록 및 페이징 
@@ -141,16 +142,16 @@ public class BlogController {
 	@Auth(type=2)
 	@PostMapping("{blogId}/admin/basic")
 	public String updateAdmin(@RequestPart(value="logo-file",required = false)  MultipartFile file, @PathVariable("blogId") String blogId, BlogVo blogVo) {
-		System.out.println("asdasd");
-		String url = FileUploadService.restoreImage(file);
-		blogVo.setLogo(url);
+		String url = null;
 		blogVo.setId(blogId);
 		
-		System.out.println("===");
-		System.out.println(blogVo);
-		System.out.println("===");
-		
-		blogService.updateBlog(blogVo);
+		if(!file.isEmpty()) {
+			url = FileUploadService.restoreImage(file);
+			blogVo.setLogo(url);
+			blogService.updateBlog(blogVo);
+		}else {
+			blogService.updateBlogTitle(blogVo);
+		}
 		
 		return "redirect:/" + blogId + "/admin/basic";
 	}
@@ -188,7 +189,7 @@ public class BlogController {
 		model.addAttribute("blogVo", blogVo);
 		// 나중에 바꿔야 함
 		
-		List<CategoryVo> categoryVo = categoryService.findById(blogId);
+		List<CategoryVo> categoryVo = categoryService.getCategoryListByUserId(blogId);
 		model.addAttribute("list", categoryVo);
 		
 		return "/blog/blog-admin-write";
@@ -202,6 +203,6 @@ public class BlogController {
 		postVo.setUser_id(blogId);
 		postService.write(postVo);
 		
-		return "/blog/blog-admin-write";
+		return "redirect:/" + blogId + "/admin/write";
 	}
 }

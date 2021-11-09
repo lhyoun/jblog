@@ -18,6 +18,7 @@
 		<div id="wrapper">
 			<div id="content">
 				<!-- 상단 게시물 내용 -->
+				<!-- 상단 게시물 내용 -->
 				<div class="blog-content">
 					<h4>${postVo.title }</h4>
 					<div>
@@ -25,6 +26,8 @@
 						${fn:replace(postVo.contents, newline, "<br/>")}
 					</div>
 				</div>
+				
+				<!-- 하단 게시물 목록 -->
 				<!-- 하단 게시물 목록 -->
 				<hr style='border: 0; height: 1px;
 	  							background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));'/>
@@ -32,7 +35,7 @@
 				<ul class="blog-list">
 					<c:forEach items='${list }' var='postVo' varStatus='status'>
 						<li>
-																		<!-- 블로그ID/postID/page/categoryNo -->
+							<!-- 블로그ID/postID/page/categoryNo -->
 							<a href="${pageContext.request.contextPath}/${blogVo.id }/${postVo.no}/1/${category_no }">${postVo.title }</a> 
 							<span>${postVo.reg_date }</span>
 						</li>
@@ -42,7 +45,8 @@
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="">◀</a></li>
+						<li style='color:rgb(30, 30, 30);'>◀</li>
+						<!-- <li><a href="">◀</a></li> -->
 						
 						<c:forEach var="num" begin="${page.startPage }" end="${page.endPage }" >
 							<c:choose>
@@ -52,21 +56,21 @@
 								<c:otherwise>
 									<c:choose>
 										<c:when test="${page.realEnd >= num}">
-																							<!-- 블로그ID/postID/page/categoryNo -->
-											<li><a href="${pageContext.request.contextPath }/${blogVo.id }/1/${num }/${category_no }">${num }</a></li>
+											<!-- 블로그ID/postID/page/categoryNo -->
+											<li><a href="${pageContext.request.contextPath }/${blogVo.id }/0/${num }/${category_no }">${num }</a></li>
 										</c:when>
 										<c:otherwise>
-												<li>${num }</li>
+											<li>${num }</li>
 										</c:otherwise>
 									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 						
-						<li><a href="">▶</a></li>
+						<li style='color:rgb(30, 30, 30);'>▶</li>
+						<!-- <li><a href="">▶</a></li> -->
 					</ul>
 				</div>			
-									
 				<br/>
 			</div>
 		</div>
@@ -85,10 +89,10 @@
 			<br/>
 			<h2 style='color:#9D96D0;'>카테고리</h2>
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/${blogVo.id }/1/1/0">모든 카테고리</a></li>
+				<li><a href="${pageContext.request.contextPath}/${blogVo.id }/0/1/0">모든 카테고리</a></li>
 				<c:forEach items='${category }' var='category' varStatus='status'>
-																	<!-- 블로그ID/postID/page/categoryNo -->
-					<li><a href="${pageContext.request.contextPath}/${blogVo.id }/1/1/${category.no }">${category.name }</a></li>
+					<!-- 블로그ID/postID/page/categoryNo -->
+					<li><a href="${pageContext.request.contextPath}/${blogVo.id }/0/1/${category.no }">${category.name }</a></li>
 				</c:forEach>
 			</ul>
 		</div>

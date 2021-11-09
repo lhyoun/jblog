@@ -2,12 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="post">
 
-	<select id="findByNo" parameterType="postvo" resultType="postvo">
+	<select id="findByNo" parameterType="map" resultType="postvo">
 		<![CDATA[
-		select no, title, contents, reg_date, category_no, user_id
-		  from post
-		 where no=#{no }
-		 and   user_id=#{user_id}
+		SELECT no, title, contents, reg_date, category_no, user_id
+		FROM   post
+		WHERE  no          like #{no }
+		AND    user_id     like #{user_id}
+		AND    category_no like #{category_no} 
+		ORDER  BY no desc
+        LIMIT  1
 		]]>
 	</select>
 	

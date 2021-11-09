@@ -14,7 +14,8 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	public List<CategoryVo> findById(String id) {
+	// userId로 해당 user의 category List
+	public List<CategoryVo> getCategoryListByUserId(String id) {
 		
 		return categoryRepository.findByBlogId(id);
 	}

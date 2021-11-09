@@ -26,6 +26,10 @@ public class BlogRepository {
 		
 		return sqlSession.insert("blog.join", blogVo);
 	}
-	
+
+	public boolean updateBlogTitle(BlogVo blogVo) {
+		
+		return sqlSession.update("blog.updateTitle", blogVo) == 1;
+	}
 
 }

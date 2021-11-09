@@ -1,13 +1,10 @@
 package com.douzone.jblog.service;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.jblog.repository.BlogRepository;
 import com.douzone.jblog.vo.BlogVo;
-import com.douzone.jblog.vo.UserVo;
 
 @Service
 public class BlogService {
@@ -19,6 +16,7 @@ public class BlogService {
 		return blogRepository.findById(id);
 	}
 	
+	// 블로그 수정 (title, logo)
 	public boolean updateBlog(BlogVo vo) {
 		
 		return blogRepository.updateBlog(vo);
@@ -28,6 +26,12 @@ public class BlogService {
 	public boolean join(BlogVo blogVo) {
 		
 		return blogRepository.join(blogVo) == 1;
+	}
+
+	// 블로그 수정 (title)
+	public boolean updateBlogTitle(BlogVo blogVo) {
+		// TODO Auto-generated method stub
+		return blogRepository.updateBlogTitle(blogVo);
 	}
 
 

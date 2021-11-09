@@ -54,5 +54,15 @@
 				 #{user_id })
 		]]>
 	</insert>
+	
+	<select id="findByKwd" parameterType="string" resultType="postvo">
+		<![CDATA[
+		SELECT no, title, contents, reg_date, category_no, user_id
+		FROM   post
+		WHERE  user_id  like #{keyword}
+		OR     title    like #{keyword}
+		OR     contents like #{keyword}
+		]]>
+	</select>
 
 </mapper>

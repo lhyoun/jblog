@@ -39,4 +39,8 @@ public class PostRepository {
 		return sqlSession.insert("post.insert", postVo);
 	}
 
+	public List<PostVo> findByKwd(String keyword) {
+		return sqlSession.selectList("post.findByKwd", keyword);
+	}
+
 }

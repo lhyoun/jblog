@@ -39,4 +39,10 @@ public class PostService {
 		return postRepository.write(postVo);
 	}
 
+	// 검색
+	public List<PostVo> getSearchList(String keyword) {
+		return postRepository.findByKwd(keyword);
+		
+	}
+
 }

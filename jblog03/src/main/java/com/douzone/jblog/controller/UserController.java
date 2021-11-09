@@ -58,7 +58,7 @@ public class UserController {
 	/* [Post]join => 회원가입 진행
 	   단, BindingResult result에 문제가 있으면 User 정보를 가지고 다시 [Get]join으로 돌아간다
 	*/ 
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result, Model model) {
 		

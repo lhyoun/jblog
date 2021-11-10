@@ -86,12 +86,12 @@ $(function(){
 <body>
 	<div id="container">
 
-		<c:import url="/WEB-INF/views/views/includes/navigation2.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation2.jsp" />
 		
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 			
-				<c:import url="/WEB-INF/views/views/includes/navigation3.jsp" />
+				<c:import url="/WEB-INF/views/includes/navigation3.jsp" />
 				
 		      	<table id="mytable" class="admin-cat">
 		      		<tr>
@@ -132,7 +132,7 @@ $(function(){
 			</div>
 		</div>
 		
-		<c:import url="/WEB-INF/views/views/includes/footer.jsp" />
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 		<input type="hidden" id="blog_id" name="blog_id" value="${blogVo.id }">
 	</div>
 </body>

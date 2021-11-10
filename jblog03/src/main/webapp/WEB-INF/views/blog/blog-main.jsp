@@ -13,7 +13,7 @@
 <body>
 	<div id="container">
 	
-		<c:import url="/WEB-INF/views/views/includes/navigation2.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation2.jsp" />
 
 		<div id="wrapper">
 			<div id="content">
@@ -97,7 +97,7 @@
 			</ul>
 		</div>
 		
-		<c:import url="/WEB-INF/views/views/includes/footer.jsp" />
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 		
 	</div>
 </body>

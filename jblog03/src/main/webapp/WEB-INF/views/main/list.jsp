@@ -12,7 +12,7 @@
 <body>
 	<div class="center-content">
 	
-		<c:import url="/WEB-INF/views/views/includes/navigation.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
 		
 		<form action="${pageContext.request.contextPath }/search" class="search-form">
 			<fieldset>

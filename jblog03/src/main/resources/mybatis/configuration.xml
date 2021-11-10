@@ -3,7 +3,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.douzone.jblog.vo.UserVo" alias="uservo" />
-		<typeAlias type="com.douzone.jblog.vo.BoardVo" alias="boardvo" />
 		<typeAlias type="com.douzone.jblog.vo.SiteVo" alias="sitevo" />
 		<typeAlias type="com.douzone.jblog.vo.BlogVo" alias="blogvo" />
 		<typeAlias type="com.douzone.jblog.vo.CategoryVo" alias="categoryvo" />
@@ -12,7 +11,6 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml" />
-		<mapper resource="mybatis/mappers/board.xml" />
 		<mapper resource="mybatis/mappers/site.xml" />
 		<mapper resource="mybatis/mappers/blog.xml" />
 		<mapper resource="mybatis/mappers/category.xml" />

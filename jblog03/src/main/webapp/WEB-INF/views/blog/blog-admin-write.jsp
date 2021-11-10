@@ -12,12 +12,12 @@
 <body>
 	<div id="container">
 	
-		<c:import url="/WEB-INF/views/views/includes/navigation2.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation2.jsp" />
 		
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				
-				<c:import url="/WEB-INF/views/views/includes/navigation3.jsp" />
+				<c:import url="/WEB-INF/views/includes/navigation3.jsp" />
 				
 				<form action="${pageContext.request.contextPath}/${authUser.id }/admin/write" method="post">
 			      	<table class="admin-cat-write">
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		
-		<c:import url="/WEB-INF/views/views/includes/footer.jsp" />
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 		
 	</div>
 </body>

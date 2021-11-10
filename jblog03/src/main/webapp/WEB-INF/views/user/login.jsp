@@ -16,7 +16,7 @@
 <body>
 	<div class="center-content">
 	
-		<c:import url="/WEB-INF/views/views/includes/navigation.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
 		<!-- method="post" -->
 		<form class="login-form" action="${pageContext.request.contextPath }/user/auth">
       		<label>아이디</label> <input type="text" name="id">

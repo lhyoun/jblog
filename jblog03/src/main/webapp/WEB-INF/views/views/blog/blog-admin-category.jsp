@@ -8,7 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
-<script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+﻿<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>﻿
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script> --%>
 
 <script>
 $(function(){
@@ -55,13 +56,11 @@ $(function(){
 		});		 
 	});
 	
-});
-</script>
-<script type="text/javascript"> 
-
-	var delete_category = (no)=>{
-		let imgObj = $(this);
-		$.ajax({
+	$(".deleteImg").click(() => {
+		var thisTmp = $(this);
+		$(thisTmp).parent().remove();
+		console.log(thisTmp);
+		/* $.ajax({
 			url: "${pageContext.request.contextPath }/category/api/delete/"+no,
 			type: "delete",
 			error: function(xhr, status, e) {
@@ -72,16 +71,17 @@ $(function(){
 				if(response.result == "success") {
 					alert('삭제되었습니다');
 					
-					//$(this).parent().parent().remove();
-					//$(imgObj).parent().parent().remove();
-					$(this).parent().remove();
+					$(thisTmp).parent().remove();
 					
 					return;
 				}
 			}
-		})
-	};		 
-</script> 
+		}); */
+	});		 
+	
+});
+</script>
+
 </head>
 <body>
 	<div id="container">
@@ -108,7 +108,7 @@ $(function(){
 							<td>${vo.name }</td>
 							<td>${vo.cnt }</td>
 							<td>${vo.desc }</td>
-							<td><img onclick="delete_category(${vo.no});" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+							<td><img class="deleteImg" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
 						</tr>  
 					</c:forEach>
 									  

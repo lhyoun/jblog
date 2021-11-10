@@ -9,7 +9,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
-<script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+﻿<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>﻿
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script> --%>
+
+<script type="text/javascript">
+	//var duplCheck = false;
+</script>
 
 <script>
 $(function(){
@@ -27,13 +32,6 @@ $(function(){
 				console.log(status, e);
 			},
 			success: function(response) {
-				console.log(response);
-				
-				/*if(response.result != "success") {
-					console.error(response.message);
-					return;
-				}*/
-				
 				if(response.data) {
 					alert("존재하는 ID입니다. 다른 ID를 사용하세요.");
 					$("#blog-id").val("").focus();
@@ -42,6 +40,9 @@ $(function(){
 				
 				$("#btn-checkId").hide();
 				$("#img-checkId").show();
+				//duplCheck = true;
+				console.log(duplCheck);
+				
 			}
 		});		 
 	});	

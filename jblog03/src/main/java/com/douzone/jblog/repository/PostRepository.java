@@ -43,4 +43,8 @@ public class PostRepository {
 		return sqlSession.selectList("post.findByKwd", keyword);
 	}
 
+	public void deleteByCategoryNo(int no) {
+		sqlSession.selectList("post.deleteByCategoryNo", no);
+	}
+
 }

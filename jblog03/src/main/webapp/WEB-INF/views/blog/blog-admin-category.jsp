@@ -45,7 +45,7 @@ $(function(){
 					+ '<td>' + $('#name').val() + '</td>'
 					+ '<td>0</td>'
 					+ '<td>' + $('#desc').val() + '</td>'
-					+ '<td><img onclick="delete_category(1);" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>');
+					+ '<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>');
 					
 					$('#name').val('');
 					$('#desc').val('');
@@ -56,29 +56,25 @@ $(function(){
 		});		 
 	});
 	
-	$(".deleteImg").click(() => {
-		var thisTmp = $(this);
-		$(thisTmp).parent().remove();
-		console.log(thisTmp);
-		/* $.ajax({
-			url: "${pageContext.request.contextPath }/category/api/delete/"+no,
-			type: "delete",
-			error: function(xhr, status, e) {
-				console.log(status, e);
-			},
-			success: function(response) {
-				
-				if(response.result == "success") {
-					alert('삭제되었습니다');
-					
-					$(thisTmp).parent().remove();
-					
-					return;
-				}
-			}
-		}); */
-	});		 
-	
+	 //삭제
+   $(".deleteImg").click(function(){
+      var target = this;
+      console.log(this);
+      $.ajax({
+         url:  "${pageContext.request.contextPath }/category/api/delete/"+ this.id,
+         type: "delete",
+         
+         success: function(response) {
+            
+            console.log(response);
+            
+            if(response.result == "success") {
+               alert('성공');
+               $(target).parent().parent().remove();
+            }
+         }
+      });
+   })
 });
 </script>
 
@@ -108,7 +104,7 @@ $(function(){
 							<td>${vo.name }</td>
 							<td>${vo.cnt }</td>
 							<td>${vo.desc }</td>
-							<td><img class="deleteImg" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+							<td><img class="deleteImg" src="${pageContext.request.contextPath}/assets/images/delete.jpg" id=${vo.no} ></td>
 						</tr>  
 					</c:forEach>
 									  

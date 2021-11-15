@@ -163,16 +163,12 @@ public class BlogController {
 	@Auth(type=2)
 	@GetMapping("{blogId}/admin/category")
 	public String category(@PathVariable("blogId") String blogId, Model model) {
-		System.out.println("asd");
-		
 		BlogVo blogVo = blogService.findById(blogId);
 		model.addAttribute("blogVo", blogVo);
 		// 나중에 바꿔야 함
-		System.out.println("asd2");
 		
 		List<CategoryDto> categoryVo = categoryService.findDtoById(blogId);
 		model.addAttribute("list", categoryVo);
-		System.out.println("asd3");
 		
 		return "/blog/blog-admin-category";
 	}

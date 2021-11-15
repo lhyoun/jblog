@@ -65,4 +65,12 @@
 		]]>
 	</select>
 
+	<delete id="deleteByCategoryNo" parameterType="int">
+		<![CDATA[
+		DELETE 
+		FROM post 
+		WHERE category_no = #{no}
+		]]>
+	</delete>
+
 </mapper>

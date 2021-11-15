@@ -1,10 +1,7 @@
 package com.douzone.jblog.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.jblog.dto.JsonResult;
-import com.douzone.jblog.security.Auth;
 import com.douzone.jblog.service.CategoryService;
 import com.douzone.jblog.vo.CategoryVo;
 
@@ -43,7 +39,6 @@ public class CategoryController {
 	//@Auth(type=2)
 	@DeleteMapping("/delete/{no}")
 	public JsonResult deleteCategory(@PathVariable("no") int no) {
-		System.out.println("aaaaa");
 		return JsonResult.notSelectTest(categoryService.deleteCategory(no));
 	}
 	

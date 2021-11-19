@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+
+	<select id="findByNo" parameterType="map" resultType="postvo">
+		<![CDATA[
+		SELECT no, title, contents, reg_date, category_no, user_id
+		FROM   post
+		WHERE  no          like #{no }
+		AND    user_id     like #{user_id}
+		AND    category_no like #{category_no} 
+		ORDER  BY no desc
+        LIMIT  1
+		]]>
+	</select>
+	
+	<select id="findById" parameterType="Long" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, reg_date, category_no, user_id
+		  from post
+		 where user_id=#{id }
+		]]>
+	</select>
+
+	<select id="findAllById" parameterType="map" resultType="postvo">
+		<![CDATA[
+		select no, title, contents, reg_date, category_no, user_id
+		  from post
+		 where user_id=#{id }
+		 and   category_no like #{c}
+		 order by reg_date desc
+		 limit #{p }, 5
+		]]>
+	</select>
+	
+	<select id="getCount" parameterType="map" resultType="integer">
+		<![CDATA[
+		select count(*) 
+		from   post 
+		where  category_no like #{c } 
+		and    user_id = #{user_id }
+		]]>
+	</select>
+
+	<insert id="insert" parameterType="postvo">
+		<![CDATA[
+		insert
+		  into post
+		values ( null,
+				 #{title },
+				 #{contents },
+				 now(),
+				 #{category_no },
+				 #{user_id })
+		]]>
+	</insert>
+	
+	<select id="findByKwd" parameterType="string" resultType="postvo">
+		<![CDATA[
+		SELECT no, title, contents, reg_date, category_no, user_id
+		FROM   post
+		WHERE  user_id  like #{keyword}
+		OR     title    like #{keyword}
+		OR     contents like #{keyword}
+		]]>
+	</select>
+
+	<delete id="deleteByCategoryNo" parameterType="int">
+		<![CDATA[
+		DELETE 
+		FROM post 
+		WHERE category_no = #{no}
+		]]>
+	</delete>
+
+</mapper>

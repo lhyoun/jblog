@@ -42,64 +42,74 @@ public class UserController {
 
 	@Autowired
 	private BlogService blogService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
-	
-	/* [Get]join => 회원가입Form
-	   @ModelAttribute UserVo vo는 [Post]join에서 Binding 문제가 생겨 다시 돌아올 경우
-	   User 정보를 가지고 들어오는데, 그걸 model에 담아서 회원가입Form으로 가게 된다
-	*/
+
+	/*
+	 * [Get]join => 회원가입Form
+	 * 
+	 * @ModelAttribute UserVo vo는 [Post]join에서 Binding 문제가 생겨 다시 돌아올 경우 User 정보를 가지고
+	 * 들어오는데, 그걸 model에 담아서 회원가입Form으로 가게 된다
+	 */
 	@GetMapping("/join")
 	public String join(@ModelAttribute UserVo vo) {
 		return "user/join";
 	}
-	
-	/* [Post]join => 회원가입 진행
-	   단, BindingResult result에 문제가 있으면 User 정보를 가지고 다시 [Get]join으로 돌아간다
-	*/ 
+
+	/*
+	 * [Post]join => 회원가입 진행 단, BindingResult result에 문제가 있으면 User 정보를 가지고 다시
+	 * [Get]join으로 돌아간다
+	 */
 	@Transactional(rollbackFor = Exception.class)
-	@RequestMapping(value="/join", method=RequestMethod.POST)
+	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result, Model model) {
-		
-		if(result.hasErrors()) {
+
+		if (result.hasErrors()) {
 			List<ObjectError> list = result.getAllErrors();
-			for(ObjectError error : list) {
+			for (ObjectError error : list) {
 				System.out.println(error);
 			}
-			
+
 			model.addAllAttributes(result.getModel());
 			// model.addAttribute("userVo", vo);
 			return "user/join";
 		}
-		
+
 		userService.join(vo);
-		
+
 		BlogVo blogVo = new BlogVo();
 		blogVo.setId(vo.getId());
-		blogVo.setTitle(vo.getId()+"의 블로그");
+		blogVo.setTitle(vo.getId() + "의 블로그");
 		blogVo.setLogo("/upload/images/default.jpg");
 		blogService.join(blogVo);
-		
+
 		CategoryVo categoryVo = new CategoryVo();
 		categoryVo.setBlog_id(vo.getId());
 		categoryVo.setDesc("미분류");
 		categoryVo.setName("미분류");
 		categoryService.addCategory(categoryVo);
-		
+
 		return "redirect:/user/joinsuccess";
 	}
-	
+
 	// 회원가입 성공 페이지
 	@RequestMapping("/joinsuccess")
 	public String joinsuccess() {
 		return "user/joinsuccess";
 	}
-	
+
 	// 로그인 화면으로 이동
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "user/login";
 	}
-	
+
+	@RequestMapping(value = "/auth", method = RequestMethod.GET)
+	public void auth() {
+	}
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public void logout() {
+	}
 }

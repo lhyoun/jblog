@@ -13,6 +13,7 @@ import com.douzone.config.web.FileUploadConfig;
 import com.douzone.config.web.MessageConfig;
 import com.douzone.config.web.MvcConfig;
 import com.douzone.config.web.SecurityConfig;
+import com.douzone.jblog.interceptor.SiteInterceptor;
 
 @Configuration
 @EnableAspectJAutoProxy
@@ -21,7 +22,7 @@ import com.douzone.config.web.SecurityConfig;
 public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	// SiteInterceptor
-	/*@Bean
+	@Bean
 	public HandlerInterceptor siteInterceptor() {
 		return new SiteInterceptor();
 	}
@@ -31,5 +32,5 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry
 			.addInterceptor(siteInterceptor())
 			.addPathPatterns("/**");
-	}*/	
+	}	
 }

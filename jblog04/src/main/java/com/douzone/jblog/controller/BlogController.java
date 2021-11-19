@@ -58,7 +58,6 @@ public class BlogController {
 	
 	@RequestMapping("")
 	public String index() {
-		System.out.println("aaaaa");
 		return "main/index";
 	}	
 	
